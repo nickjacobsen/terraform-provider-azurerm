@@ -90,7 +90,7 @@ func resourceLogAnalyticsSavedSearch() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 					ValidateFunc: validation.StringMatch(
-						regexp.MustCompile(`^[a-zA-Z0-9!-_]*:[a-zA-Z0-9!_-]+=[a-zA-Z0-9!_-]+`),
+						regexp.MustCompile(`[a-zA-Z0-9!_-]*:\(?[a-zA-Z0-9!_-]+\)*(=[a-zA-Z0-9!_-]+)*`),
 						"Log Analytics Saved Search Function Parameters must be in the following format: param-name1:type1=default_value1",
 					),
 				},

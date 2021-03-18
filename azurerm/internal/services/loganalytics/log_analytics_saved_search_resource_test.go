@@ -164,10 +164,10 @@ resource "azurerm_log_analytics_saved_search" "test" {
 
   category     = "Saved Search Test Category"
   display_name = "Create or Update Saved Search Test"
-  query        = "Heartbeat | summarize Count() by Computer | take a"
+  query        = "Heartbeat | where OSType in (_ostype) | summarize count() by Computer | extend _env | take _rows"
 
   function_alias      = "heartbeat_func"
-  function_parameters = ["a:int=1"]
+  function_parameters = ["_rows:int=1,_env:string,(_ostype:string)"]
 }
 `, data.RandomInteger, data.Locations.Primary, data.RandomInteger, data.RandomInteger)
 }
